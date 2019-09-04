@@ -1,24 +1,23 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import NavBar from './components/navBar/NavBar'
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Categorias from './components/categorias/categorias';
+import Restaurantes from './components/restaurantes/restaurantes';
+import Erro404 from './components/404/error404';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <NavBar />
+        <Switch>
+          <Route exact path="/" component={Categorias} />
+          <Route path="/restaurantes" component={Restaurantes} />
+          <Route component={Erro404} />
+        </Switch>
+      </Router>
     </div>
   );
 }
