@@ -44,10 +44,10 @@ const NavBAr = () => {
       <AppBar className={classes.back} position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-          <Link to="/" style={{ textDecoration: 'none', color: ' #FF5252' }}> i<strong>Food</strong> </Link>
+          <Link to="/inicio/categorias" style={{ textDecoration: 'none', color: ' #FF5252' }}> i<strong>Food</strong> </Link>
           </Typography> 
           <Typography className={classes.subTitle} noWrap>
-            <Link to="/restaurantes" style={{ textDecoration: 'none', color: '#707070' }}> Restaurantes </Link>
+            <Link to="/inicio/restaurantes" style={{ textDecoration: 'none', color: '#707070' }}> Restaurantes </Link>
           </Typography>
           <div className={classes.grow} />
           <IconButton

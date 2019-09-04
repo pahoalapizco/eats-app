@@ -1,20 +1,20 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import NavBar from './components/navBar/NavBar'
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import Categorias from './components/categorias/categorias';
-import Restaurantes from './components/restaurantes/restaurantes';
 import Erro404 from './components/404/error404';
+import Login from './components/login/login';
+import Registro from './components/registro/registro';
+import Inicio from './components/inicio/inicio';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <NavBar />
         <Switch>
-          <Route exact path="/" component={Categorias} />
-          <Route path="/restaurantes" component={Restaurantes} />
+          <Route exact path="/" component={Login} />
+          <Route path="/registro" component={Registro} />
+          <Route path="/inicio" component={Inicio} />
           <Route component={Erro404} />
         </Switch>
       </Router>
