@@ -1,100 +1,23 @@
 import React from 'react'
 import Categoria from './categoria';
 
-const Categorias = () => (
-    <div>
-      <p>Estas son las categorias</p>      
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-      <Categoria />
-    </div>
-);
+const Categorias = () => {
+    return (
+      <div> 
+        {
+          categorias.data.getCategoria.map(categoria => {
+            return (
+              <Categoria 
+                key={categoria._id}
+                img={categoria.img}
+                name={categoria.name}
+              />
+            );
+          })
+        }     
+        
+      </div>
+    )
+}
 
 export default Categorias
