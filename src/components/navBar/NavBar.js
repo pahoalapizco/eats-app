@@ -45,10 +45,7 @@ const NavBAr = () => {
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
           <Link to="/inicio/categorias" style={{ textDecoration: 'none', color: ' #FF5252' }}> i<strong>Food</strong> </Link>
-          </Typography> 
-          <Typography className={classes.subTitle} noWrap>
-            <Link to="/inicio/restaurantes" style={{ textDecoration: 'none', color: '#707070' }}> Restaurantes </Link>
-          </Typography>
+          </Typography>          
           <div className={classes.grow} />
           <IconButton
               aria-label="account of current user"

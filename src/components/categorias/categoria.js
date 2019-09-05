@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { 
   Card, 
   CardMedia,
@@ -30,7 +31,7 @@ const Categoria = ({img, name}) => {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {name}
+         <Link to="/inicio/platillos"  style={{ textDecoration: 'none', color: '#707070' }}> {name} </Link>
         </Typography>
         </CardContent>
     </Card>
