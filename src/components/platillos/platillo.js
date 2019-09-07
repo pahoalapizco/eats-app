@@ -23,7 +23,8 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flex: '1 0 auto',
-    align: 'left'
+    align: 'left',
+    
   },
   cover: {
     width: '40%',
@@ -40,10 +41,10 @@ const Platillo = ({ name, description, price, img }) => {
         <Typography  variant="h6" style={{color:"#FF5252"}}>
           {name}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" color="textSecondary" component="p" noWrap>
          {description}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="inherit" color="textSecondary" component="p">
          $ {price} MXN
         </Typography>
       </CardContent>       

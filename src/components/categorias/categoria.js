@@ -14,13 +14,14 @@ const Categoria = ({img, name}) => {
       maxWidth: '100%',
       alignSelf: 'center',
       marginTop: '5%', // 16:9
+      margin: '8%'
     },
     media: {
       height: 0,
-      paddingTop: '56.25%', // 16:9
+      paddingTop: '45%', // 16:9
     },
   }));
-  
+
   const classes = useStyles();
   return (
     <Card className={classes.card}>
@@ -30,10 +31,10 @@ const Categoria = ({img, name}) => {
         title={name}
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography align="center" variant="subtitle2" color="textSecondary" component="p">
          <Link to="/inicio/platillos"  style={{ textDecoration: 'none', color: '#707070' }}> {name} </Link>
         </Typography>
-        </CardContent>
+      </CardContent>
     </Card>
   )
   

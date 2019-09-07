@@ -9,7 +9,7 @@ import Inicio from './components/inicio/inicio';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
