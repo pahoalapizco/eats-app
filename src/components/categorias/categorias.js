@@ -1,7 +1,8 @@
 import React from 'react'
 import Categoria from './categoria';
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+import Loading from '../utils/loading';
 
 const GET_CATEGORIAS = gql`
   {
@@ -16,13 +17,13 @@ const GET_CATEGORIAS = gql`
 const Categorias = () => {
   const { loading, error, data } = useQuery(GET_CATEGORIAS);
   
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Loading />
   if (error) return <p> A ocurrido un error.. </p>
 
     return (
       <div> 
         {
-            data.getCategoria.map(categoria => {
+          data.getCategoria.map(categoria => {
             return (
               <Categoria 
                 key={categoria._id}
@@ -31,10 +32,9 @@ const Categorias = () => {
               />
             );
           })
-        }     
-        
+        }             
       </div>
-    )
+    );
 }
 
 export default Categorias
