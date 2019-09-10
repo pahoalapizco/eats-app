@@ -12,13 +12,13 @@ import { Redirect } from 'react-router-dom'
 import Loading from './../utils/loading';
 import { useMutation } from '@apollo/react-hooks';
 
-// const LOGIN = gql`
-//   mutation login($email: String, $password: String) {
-//     login(email: $email, password: $password) {
-//       token
-//     }
-//   }
-// `;
+const LOGIN = gql`
+  mutation login($email: String, $password: String) {
+    login(email: $email, password: $password) {
+      token
+    }
+  }
+`;
 
 
 
@@ -74,9 +74,20 @@ const LoginForm = () => {
     })
   }
 
+  let variables;
   const handleClick = (values) => {
-    let variables = {...values}
-    console.log(variables)
+    login({
+      variables: {...values}
+    })
+  }
+  
+  const [login, { loading, error, data }] = useMutation(LOGIN, variables);
+  
+  if (loading) return <Loading />
+  if (error) return <p> A ocurrido un error.. </p>
+  if (data) {
+    localStorage.setItem('jwt', data.login.token);
+    return (<Redirect to="/inicio/categorias" />);
   }
 
   return (
@@ -118,7 +129,6 @@ const LoginForm = () => {
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
                   id="password"
                   autoComplete="current-password"
                   value={values.password}
