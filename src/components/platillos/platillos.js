@@ -1,11 +1,13 @@
 import React from 'react'
 import Platillo from './platillo';
+import { withRouter } from "react-router";
 
-const Platillos = () => { 
+const Platillos = ({ location }) => { 
+  const platillos = location.state.platillos;
    return (
     <div>
       {
-        platillos.data.getPlatillos.map(platillo => {
+        platillos.map(platillo => {
           return (
             <Platillo 
               key={platillo._id}
@@ -21,8 +23,4 @@ const Platillos = () => {
   )
 }
 
-export default Platillos
-
-/**
- * 
- */
+export default withRouter(Platillos);

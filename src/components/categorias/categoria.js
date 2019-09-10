@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect  } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
+import { withRouter } from "react-router";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -80,8 +81,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Categoria({ _id, name, img }) {
+ const Categoria = ({ _id, name, img, platillos, history }) => {
   const classes = useStyles();
+  // const [platilloArray, setPlatillos] = useState(platillos)
+
+  const handleClic = () => {
+    history.push('/platillos', { platillos });
+  }
+
 
   return (
     <div className={classes.root}>
@@ -90,6 +97,7 @@ export default function Categoria({ _id, name, img }) {
           key={_id}
           className={classes.image}
           focusVisibleClassName={classes.focusVisible}
+          onClick={handleClic}
         >
           <span
             className={classes.imageSrc}
@@ -104,12 +112,14 @@ export default function Categoria({ _id, name, img }) {
               variant="subtitle1"
               color="inherit"
               className={classes.imageTitle}
-            >
-              {name}
-              <span className={classes.imageMarked} />
+            > 
+              <strong> {name} </strong>
+              <span className={classes.imageMarked} />        
             </Typography>
           </span>
         </ButtonBase>
     </div>
   );
 }
+
+export default withRouter(Categoria);

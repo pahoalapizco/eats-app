@@ -10,6 +10,13 @@ const GET_CATEGORIAS = gql`
       _id
       name
       img
+      platillos {
+        _id
+        name
+        description
+        price
+        img
+      }
     }
   }
 `;
@@ -19,7 +26,6 @@ const Categorias = () => {
   
   if (loading) return <Loading />
   if (error) return <p> A ocurrido un error.. </p>
-
     return (
       <div> 
         {
@@ -29,6 +35,7 @@ const Categorias = () => {
                 key={categoria._id}
                 img={categoria.img}
                 name={categoria.name}
+                platillos={categoria.platillos}
               />
             );
           })
