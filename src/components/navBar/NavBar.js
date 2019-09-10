@@ -44,7 +44,7 @@ const NavBAr = () => {
       <AppBar className={classes.back} position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-          <Link to="/inicio/categorias" style={{ textDecoration: 'none', color: '#FF5252' }}> i<strong>Food</strong> </Link>
+          <Link to="/categorias" style={{ textDecoration: 'none', color: '#FF5252' }}> i<strong>Food</strong> </Link>
           </Typography>          
           <div className={classes.grow} />
           <IconButton

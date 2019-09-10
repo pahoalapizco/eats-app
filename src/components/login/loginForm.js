@@ -87,7 +87,7 @@ const LoginForm = () => {
   if (error) return <p> A ocurrido un error.. </p>
   if (data) {
     localStorage.setItem('jwt', data.login.token);
-    return (<Redirect to="/inicio/categorias" />);
+    return (<Redirect to="/categorias" />);
   }
 
   return (
