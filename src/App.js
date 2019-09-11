@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import Routing from './config/router';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
-// import { Query } from 'react-apollo';
+// import { useQuery } from '@apollo/react-hooks';
+import { Query } from 'react-apollo';
 import client from './apollo';
 import Loading from './components/utils/loading'
 // import { Redirect } from 'react-router-dom'
@@ -15,48 +15,8 @@ query {
 }
 `;
 
-// class App extends React.Component {
-//   handleLogged = (usuarioLogeado = true) => {
-//     client.mutate({
-//       mutation: gql`
-//         mutation setUserLogged($logged: Boolean) {
-//           setUserLogged(logged: $logged) @client{
-//               data
-//           }
-//         }
-//       `,
-//       variables: { logged: usuarioLogeado }
-//     })
-//   }
-
-//   componentDidMount() {
-//     const token = localStorage.getItem('jwt');
-//     if (token) this.handleLogged();
-//   }
-//   render(){
-//     return (
-//       <div>
-//        <Query query={USER_LOGED_QUERY}>
-//        {
-//          ({ data, loading }) => {
-//             console.log("TCL: App -> data", data)
-//             if (loading) return <Loading />
-//             return (
-//               <Routing 
-//                   handleLogged={this.handleLogged}
-//                   userLogged={data.loginState.userLogged}
-//               />
-//             );
-//           }
-//         }
-//         </Query>
-//       </div>
-//     );
-//   }
-// }
-
-function App() {
-  const handleLogged = (usuarioLogeado = true) => {
+class App extends React.Component {
+  handleLogged = (usuarioLogeado = true) => {
     client.mutate({
       mutation: gql`
         mutation setUserLogged($logged: Boolean) {
@@ -69,22 +29,29 @@ function App() {
     })
   }
 
-  useEffect(() => {
+  componentDidMount() {
     const token = localStorage.getItem('jwt');
-    if (token) handleLogged();
-  }, []);
-
-    const { data, loading } = useQuery(USER_LOGED_QUERY)
-    console.log('before?: ',data);
-    if (loading) return <Loading />
+    if (token) this.handleLogged();
+  }
+  render(){
     return (
       <div>
-        <Routing 
-          handleLogged={handleLogged}
-          userLogged={() => data.loginState.userLogged}
-        />
+       <Query query={USER_LOGED_QUERY}>
+       {
+         ({ data, loading }) => {
+            if (loading) return <Loading />
+            return (
+              <Routing 
+                  handleLogged={this.handleLogged}
+                  userLogged={data.loginState.userLogged}
+              />
+            );
+          }
+        }
+        </Query>
       </div>
     );
+  }
 }
 
 export default App;

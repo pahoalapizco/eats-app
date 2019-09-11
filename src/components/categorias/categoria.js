@@ -83,12 +83,10 @@ const useStyles = makeStyles(theme => ({
 
  const Categoria = ({ _id, name, img, platillos, history }) => {
   const classes = useStyles();
-  // const [platilloArray, setPlatillos] = useState(platillos)
 
   const handleClic = () => {
     history.push('/platillos', { platillos });
   }
-
 
   return (
     <div className={classes.root}>

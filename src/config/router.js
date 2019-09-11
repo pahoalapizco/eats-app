@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-d
 import NavBAr from '../components/navBar/NavBar';
 import Login from '../components/login/loginForm';
 import Categorias from '../components/categorias/categorias';
-import Platillos from '../components/platillos/platillos';
+import Platillos from '../components/platillos/index';
 import { Scrollbars } from 'react-custom-scrollbars'
+import DetallePlatillo from './../components/platillos/platillo';
 const PublicRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -13,7 +14,6 @@ const PublicRoute = ({ component: Component, ...rest }) => (
 );
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  console.log('PrivateRoute', {...rest})
   return (
     <Route {...rest} render={(props) => (
       rest.userLogged === true
@@ -37,6 +37,11 @@ class Routing extends React.Component {
               exact
               path='/'
               component={() =>  <Login handleLogged={handleLogged} />}
+            />
+            <PublicRoute
+              exact
+              path='/platillo'
+              component={() =>  <DetallePlatillo />}
             />
             <PrivateRoute
               path="/categorias"
