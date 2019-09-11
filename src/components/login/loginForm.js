@@ -63,7 +63,7 @@ export const theme = createMuiTheme({
   },
 });
 
-const LoginForm = () => {
+const LoginForm = ({ handleLogged }) => {
   const classes = useStyles();
   const [values, setValues] = useState({ email: '', password: '' });
   
@@ -80,13 +80,20 @@ const LoginForm = () => {
       variables: {...values}
     })
   }
-  
+
+  const setToken = ({ token }) => {
+    handleLogged();
+    if (token) {
+      localStorage.setItem("jwt", token);
+    }
+  }
+   
   const [login, { loading, error, data }] = useMutation(LOGIN, variables);
   
   if (loading) return <Loading />
   if (error) return <p> A ocurrido un error.. </p>
   if (data) {
-    localStorage.setItem('jwt', data.login.token);
+    setToken(data.login);
     return (<Redirect to="/categorias" />);
   }
 

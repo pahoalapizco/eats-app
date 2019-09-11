@@ -12,37 +12,40 @@ const PublicRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={(props) => (
-    rest.usserLogged === true
-      ? <Component {...props} />
-      : <Redirect to='/' />
-  )} />
-);
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  console.log('PrivateRoute', {...rest})
+  return (
+    <Route {...rest} render={(props) => (
+      rest.userLogged === true
+        ? <Component {...props} />
+        : <Redirect to='/' />
+    )} />
+  )
+}
 
 
 class Routing extends React.Component {
   render () {
-    const { usserLogged } = this.props
-    const alto = usserLogged ? 'calc(100vh - 64px)' : 'calc(100vh)'
+    const { userLogged, handleLogged } = this.props
+    const alto = userLogged ? 'calc(100vh - 64px)' : 'calc(100vh)'
     return(
       <Router>
-        { usserLogged && <NavBAr /> }
+        { userLogged && <NavBAr /> }
         <Scrollbars  style={{width: '100%', height:alto}}>
           <Switch>
             <PublicRoute
               exact
               path='/'
-              component={() =>  <Login />}
+              component={() =>  <Login handleLogged={handleLogged} />}
             />
             <PrivateRoute
               path="/categorias"
-              usserLogged={usserLogged}
+              userLogged={userLogged}
               component={() => <Categorias />}
             />
             <PrivateRoute
               path="/platillos"
-              usserLogged={usserLogged}
+              userLogged={userLogged}
               component={() => <Platillos />}
             />
           </Switch>
