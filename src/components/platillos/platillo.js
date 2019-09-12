@@ -9,6 +9,7 @@ import { withRouter } from "react-router";
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Loading from '../utils/loading';
+import Agregar from '../utils/agregar';
 
 const GET_PLATILLO = gql`
   query Platillo($platilloID: ID){
@@ -22,7 +23,7 @@ const GET_PLATILLO = gql`
   }
 `;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 1
   },
@@ -30,8 +31,7 @@ const useStyles = makeStyles({
     maxWidth: 345,
     margin: '5%'
   }
-});
-
+}));
 const DetallePlatillo = ({ history }) => {
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_PLATILLO, {
@@ -43,7 +43,8 @@ const DetallePlatillo = ({ history }) => {
   const { _id, name, description, price, img } = data.getPlatillo;
 
   return (
-    <Card className={classes.card}>
+    <div>
+      <Card className={classes.card}>
         <CardMedia
           component="img"
           height="140"
@@ -55,14 +56,16 @@ const DetallePlatillo = ({ history }) => {
             {name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          {description}
+            {description}
           </Typography>
           <div className={classes.grow}/>
           <Typography variant="inherit" color="textSecondary" component="p">
-          $ {price} MXN
+            $ {price} MXN
           </Typography>  
         </CardContent>
-    </Card>
+      </Card>
+      <Agregar price={price}/>
+  </div>
   );
 }
 
