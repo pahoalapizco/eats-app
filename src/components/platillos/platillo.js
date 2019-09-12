@@ -11,23 +11,16 @@ import { useQuery } from '@apollo/react-hooks';
 import Loading from '../utils/loading';
 
 const GET_PLATILLO = gql`
-{
-  query getPlatillo($platilloID: ID) {
-    getPlatillo(platilloID: $platilloID) {
+  query Platillo($platilloID: ID){
+    getPlatillo(platilloID: $platilloID){
       _id
       name
       description
-      price
       img
-      restaurant {
-        _id
-      }
+      price
     }
   }
- 
-}
 `;
-
 
 const useStyles = makeStyles({
   grow: {
@@ -41,28 +34,33 @@ const useStyles = makeStyles({
 
 const DetallePlatillo = ({ history }) => {
   const classes = useStyles();
-  const [getPlatillo, { loading, error, data }]= useQuery(GET_PLATILLO, {
-    variables: { platilloID: history.location.state._id }
+  const { loading, error, data } = useQuery(GET_PLATILLO, {
+    variables: { platilloID: history.location.state._id },
   })
 
   if (loading) return <Loading />
+  if (error) return 'A ocurrido un error.. :c';
+  const { _id, name, description, price, img } = data.getPlatillo;
 
   return (
     <Card className={classes.card}>
         <CardMedia
           component="img"
           height="140"
-          image="http://res.cloudinary.com/dmwsbri4c/image/upload/v1567117362/ejuoyamosem5c9iqux1b.jpg"
+          image={img}
         />
         <div className={classes.grow}/>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+          <Typography variant="h6" style={{color:"#FF5252"}}>
+            {name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+          {description}
           </Typography>
+          <div className={classes.grow}/>
+          <Typography variant="inherit" color="textSecondary" component="p">
+          $ {price} MXN
+          </Typography>  
         </CardContent>
     </Card>
   );

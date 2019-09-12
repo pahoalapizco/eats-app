@@ -43,7 +43,6 @@ const useStyles = makeStyles(theme => ({
 const Platillo = ({ _id, name, description, price, img, history }) => {
   const classes = useStyles();
   const handleClic = () => {
-    console.log(_id)
     history.push('/platillo', { _id });
   }
   return (
