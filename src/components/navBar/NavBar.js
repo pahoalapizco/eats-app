@@ -55,14 +55,16 @@ const NavBAr = () => {
           >
             <Icon > description </Icon>
           </IconButton>
-          <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              className={classes.iconStyle}
-          >
-            <Icon > shopping_cart </Icon>
-          </IconButton>
+          <Link to="/carrito" style={{ textDecoration: 'none', color: '#FF5252' }}> 
+            <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                className={classes.iconStyle}
+            >
+              <Icon > shopping_cart </Icon>
+            </IconButton>
+          </Link>
           <IconButton
               aria-label="account of current user"
               aria-controls="menu-appbar"

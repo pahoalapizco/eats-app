@@ -9,7 +9,7 @@ import { withRouter } from "react-router";
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Loading from '../utils/loading';
-import Agregar from '../utils/agregar';
+import Agregar from './agregar';
 
 const GET_PLATILLO = gql`
   query Platillo($platilloID: ID){
@@ -19,6 +19,7 @@ const GET_PLATILLO = gql`
       description
       img
       price
+      restaurant{ _id }
     }
   }
 `;
@@ -32,15 +33,29 @@ const useStyles = makeStyles(theme => ({
     margin: '5%'
   }
 }));
+
 const DetallePlatillo = ({ history }) => {
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_PLATILLO, {
     variables: { platilloID: history.location.state._id },
   })
-
+  
   if (loading) return <Loading />
   if (error) return 'A ocurrido un error.. :c';
-  const { _id, name, description, price, img } = data.getPlatillo;
+  const { _id, name, description, price, img, restaurant } = data.getPlatillo;
+
+  const handleClick = ({cantidad, importe}) => {
+    const carrito = {
+      restaurant: restaurant._id,
+      total: importe,
+      detail: [{
+        platillo: _id,
+        cantidad,
+        importe
+      }]
+    }
+    history.push('/carrito', { carrito });
+  }
 
   return (
     <div>
@@ -64,7 +79,10 @@ const DetallePlatillo = ({ history }) => {
           </Typography>  
         </CardContent>
       </Card>
-      <Agregar price={price}/>
+      <Agregar 
+        price={price}
+        handleClick={handleClick}
+      />
   </div>
   );
 }

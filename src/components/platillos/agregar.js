@@ -46,18 +46,14 @@ export const theme = createMuiTheme({
   },
 });
 
-const Agregar = ({ price }) => {
-  const inicial = price;
+const Agregar = ({ price, handleClick }) => {
   const [cantidad, setCantidad] = useState(1)
   const [total, setTotal] = useState(price)
-
-  useEffect(() => {
-   if (cantidad <= 0){
-    setCantidad(1)
-   }
-   setTotal(price*cantidad)
-  }, [cantidad]);
   
+  useEffect(() => {
+    setTotal(price*cantidad)
+  }, [cantidad]);
+
   const classes = useStyles();
   return (
     <div>
@@ -67,16 +63,17 @@ const Agregar = ({ price }) => {
             <IconButton 
               size="small" 
               className={classes.removeButtom}
-              onClick={() => setCantidad(cantidad-1)}
+              onClick={() => setCantidad(cantidad <= 1 ? 1 : cantidad-1)}
+              disabled={(cantidad<=1) ? true : false}
             >
               <Icon> remove_circle </Icon>
             </IconButton>
-            <Typography className={classes.title} >
+            <Typography className={classes.title}>
               {cantidad}
             </Typography>
             <IconButton 
               size="small" 
-              className={classes.addButtom} 
+              className={classes.addButtom}
               onClick={() => setCantidad(cantidad + 1)}
               >
               <Icon >
@@ -90,7 +87,7 @@ const Agregar = ({ price }) => {
           variant="contained"
           className={classes.submit}
           color="primary"
-          // onClick={() => handleClick(values)}
+          onClick={() => handleClick({ cantidad, importe: total })}
         >
           Añadir al carrito 
           Total $ {total} MXN

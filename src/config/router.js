@@ -6,6 +6,8 @@ import Categorias from '../components/categorias/categorias';
 import Platillos from '../components/platillos/index';
 import { Scrollbars } from 'react-custom-scrollbars'
 import DetallePlatillo from './../components/platillos/platillo';
+import Carrito from './../components/carrito';
+
 const PublicRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -42,6 +44,11 @@ class Routing extends React.Component {
               exact
               path='/platillo'
               component={() =>  <DetallePlatillo />}
+            />
+            <PublicRoute
+              exact
+              path='/carrito'
+              component={() =>  <Carrito />}
             />
             <PrivateRoute
               path="/categorias"
