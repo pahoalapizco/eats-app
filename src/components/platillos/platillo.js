@@ -49,7 +49,10 @@ const DetallePlatillo = ({ history }) => {
       restaurant: restaurant._id,
       total: importe,
       detail: [{
-        platillo: _id,
+        platillo: {
+          _id,
+          name
+        },
         cantidad,
         importe
       }]

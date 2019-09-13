@@ -21,6 +21,7 @@ const GET_CARRITO =  gql`
     detail {
       platillo {
         _id
+        name
       }
       cantidad
       importe
@@ -30,40 +31,26 @@ const GET_CARRITO =  gql`
 `;
 
 /**
- * @TODO: Si hay carrito agregar nuevos elementos agregados 
  * @TODO: Hacer la mutation addCarrito.
  * @TODO: Finalizar pedido.
  * @TODO: -- EN PEDIDOR: Hacer componentes para pedidos y repartidor!!!
  * @TODO: Sigen pendientes las rutas publicas y privadas >..<
  */
 const CarritoContainer = ({ history }) => {
-  const { loading, error, data } = useQuery(GET_CARRITO);
-  let carrito;
+  const { loading, data, error } = useQuery(GET_CARRITO);
+
+  let carrito = null;
 
   if (loading) return (<Loading />);
+  if (error) return (<p> Ocurrió un error ... :c </p>);
 
   if (data.getCarrito && history.location.state) {
     carrito = {
-      restaurant: data.getCarrito.restaurant._id,
-      total: data.getCarrito.total,
-      detail: []
+      ...data.getCarrito
     };
-    // Agrega el detallado de BD al nuevo carrito
-    data.getCarrito.detail.forEach(d => {
-      carrito.detail.push({
-        platillo: d.platillo._id,
-        cantidad: d.cantidad,
-        importe: d.importe
-      });
-    });    
-
     // Agrega detallado seleccionado
     history.location.state.carrito.detail.forEach(d => {
-      carrito.detail.push({
-        platillo: d.platillo,
-        cantidad: d.cantidad,
-        importe: d.importe
-      });
+      carrito.detail.push(d);
     });    
     // calcula el nuevo total.
     carrito.total +=  history.location.state.carrito.total
@@ -71,10 +58,7 @@ const CarritoContainer = ({ history }) => {
     carrito = history.location.state ? history.location.state.carrito : data.getCarrito;
   }
 
-  console.log('carrito: ',  carrito);
-  console.log('state-carrito', history.location.state.carrito);
-
-  const carritoRender = carrito ?  <Carrito /> : <CarritoVacio />
+  const carritoRender = carrito ?  <Carrito carrito={carrito}/> : <CarritoVacio />
   return(
     <div>
       {carritoRender}
